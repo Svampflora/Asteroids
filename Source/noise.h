@@ -55,12 +55,12 @@ static inline std::vector<float> get_perlin_noise_1d(int _count, int _octaves)
     return perlin_noise;
 }
 
-static inline float flerp(float a, float b, float t)
+static inline constexpr float lerp(float a, float b, float t) 
 {
     return a + t * (b - a);
 }
 
-static inline float mapRange(float value, float inMin, float inMax, float outMin, float outMax)
+static inline float map_range(float value, float inMin, float inMax, float outMin, float outMax)
 {
     return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
@@ -72,10 +72,12 @@ static inline std::vector<float> get_perlin_noise_1d(int _count, int _octaves, f
 
     for (int x = 0; x < _count; x++)
     {
+        //TODO: settings
         float noise = 0.0f;
         float scale_accumulate = 0.0f;
-        float frequency = scale;
         float amplitude = 1.0f;
+
+        float frequency = scale;
 
         for (int octave = 0; octave < _octaves; octave++)
         {
@@ -86,19 +88,17 @@ static inline std::vector<float> get_perlin_noise_1d(int _count, int _octaves, f
             const int sample_2 = (sample_1 + pitch) % _count;
 
             const float blend = (x - sample_1) / static_cast<float>(pitch);
-            const float sample = flerp(static_cast<float>(seed_noise[sample_1]), static_cast<float>(seed_noise[sample_2]), blend);
+            const float sample = lerp(static_cast<float>(seed_noise[sample_1]), static_cast<float>(seed_noise[sample_2]), blend);
 
             noise += sample * amplitude;
             scale_accumulate += amplitude;
-            amplitude *= 0.5f; // Reduce amplitude for each octave
-            frequency *= 2.0f; // Increase frequency for each octave
+            amplitude *= 0.5f; //TODO: settings octave amplitude reduction
+            frequency *= 2.0f; //TODO: settings frequency increase for each octave
         }
 
-        // Normalize the noise by dividing by the accumulated amplitude (scale_accumulate)
-        float normalizedNoise = noise / scale_accumulate;
+        const float normalized_noise = noise / scale_accumulate;
 
-        // Map the normalized noise value to the desired range
-        perlin_noise[x] = mapRange(normalizedNoise, -1.0f, 1.0f, minValue, maxValue);
+        perlin_noise[x] = map_range(normalized_noise, -1.0f, 1.0f, minValue, maxValue);
     }
 
     return perlin_noise;

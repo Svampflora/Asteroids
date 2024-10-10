@@ -9,18 +9,16 @@ enum class Asteroid_type {small, big, huge };
 
 class Asteroid : public Entity
 {
-
 	Asteroid_type type;
 	std::vector<float> points;
-	//Sprite sprite_settings(Asteroid_type _size);
 
+	float set_radius() noexcept;
 public:
 	Asteroid(Asteroid_type _type, Vector2 _position, Vector2 _velocity);
 
 
 	Asteroid_type get_type() const noexcept;
 	int get_score() const noexcept;
-	void set_radius(); //TODO: necessary?
 	void update() override;
 	void draw() const noexcept override;
 

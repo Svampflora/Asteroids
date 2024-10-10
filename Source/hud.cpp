@@ -45,10 +45,10 @@ void HUD::update(float _delta_time)
 
 void HUD::draw_current_score(const int _score) const noexcept
 {
+	//TODO: to_string throws
 	std::string text = "SCORE: " + std::to_string(_score);
 
 	const Vector2 position = { 0.8f * GetScreenWidth(), 0.1f * GetScreenHeight() };
-	//DrawText(text.data(), position_x, position_y, 2, WHITE);
 	DrawTextEx(font, text.data(), position, 25.0f, 1.0f, WHITE);
 }
 
@@ -60,6 +60,7 @@ void HUD::draw_score_particles() const noexcept
 		{
 			//TODO: define score particle lifetime 1.5f
 			const float life_fraction = (particle.time_remaining / 1.5f);
+			//TODO: to_string throws
 			const std::string text = std::to_string(particle.score);
 			DrawTextEx(font, text.data(), particle.position, 20.0f, 1.0f, LerpColor(WHITE, {WHITE.r, WHITE.g, WHITE.b, 0}, life_fraction));
 
