@@ -7,11 +7,11 @@ class Projectile;
 class Entity
 {
 protected:
-	Vector2 position;
-	Vector2 velocity;
-	float angle;
-	float radius;
-	bool alive;
+	Vector2 position{0.0f, 0.0f};
+	Vector2 velocity{ 0.0f, 0.0f };
+	float angle{ 0.0f };
+	float radius{ 0.0f };
+	bool alive{ 0 };
 public:
 
 	Circle get_hitbox() const noexcept;

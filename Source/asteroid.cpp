@@ -12,23 +12,30 @@ Asteroid::Asteroid(Asteroid_type _type, Vector2 _position, Vector2 _velocity)
 	radius = set_radius();
 }
 
-static inline void DrawAsteroid(Vector2 center, std::vector<float> _points, float _radius/*, float rotation*/) noexcept
+static inline void DrawAsteroid(Vector2 center, std::vector<float> _radii, float _radius/*, float rotation*/) noexcept
 {
-	const int segments = narrow_cast<int>( _points.size() );
+	const int segments = narrow_cast<int>( _radii.size() );
 	if (segments < 3) return;
 
-	std::vector<Vector2> points (segments + 2);
-	points[0] = center;
+	std::vector<Vector2> points (segments + 1);
 	const float angleStep = (2 * PI) / segments;
 
-	for (int i = 0; i < segments; i++)
-	{
-		const float angle = i * angleStep;
-		points[i + 1] = { center.x + (_radius + _points[i]) * cosf(-angle), center.y + (_radius + _points[i]) * sinf(-angle) };
-	}
-	points[segments + 1] = points[1];
-	DrawTriangleFan(points.data(), segments + 2, WHITE);
+	auto angle = 0.0f;
+	auto point_it = points.begin() + 1;
+	auto radius_it = _radii.begin();
 
+	*points.begin() = center;
+	for (; point_it != points.end() && radius_it != _radii.end(); ++point_it, ++radius_it, angle += angleStep)
+	{
+		*point_it = 
+		{
+			center.x + (_radius + *radius_it) * cosf(-angle),
+			center.y + (_radius + *radius_it) * sinf(-angle)
+		};
+	}
+	*points.rbegin() = *(points.begin() + 1);
+
+	DrawTriangleFan(points.data(), segments + 2, WHITE);
 }
 
 float Asteroid::set_radius() noexcept//TODO: put in settings
