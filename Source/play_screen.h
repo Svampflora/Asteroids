@@ -25,8 +25,6 @@ class Play_screen : public State
 
 	template <typename ObjectType>
 	void collisions(std::vector<ObjectType>& objects);
-	//template <typename ObjectType, typename OtherType>
-	//void collisions(std::vector<ObjectType>& objects, std::vector<OtherType>& other_objects);
 	template <typename ObjectType, typename OtherType>
 	void collisions(std::vector<ObjectType>& objects, OtherType& single_object);
 	void collisions(std::vector<Asteroid>& _asteroids, std::vector<Projectile>& _projectiles);

@@ -62,7 +62,7 @@ void HUD::draw_score_particles() const noexcept
 			const float life_fraction = (particle.time_remaining / 1.5f);
 			//TODO: to_string throws
 			const std::string text = std::to_string(particle.score);
-			DrawTextEx(font, text.data(), particle.position, 20.0f, 1.0f, LerpColor(WHITE, {WHITE.r, WHITE.g, WHITE.b, 0}, life_fraction));
+			DrawTextEx(font, text.data(), particle.position, 20.0f, 1.0f, lerp_color(WHITE, {WHITE.r, WHITE.g, WHITE.b, 0}, life_fraction));
 
 		}
 	}

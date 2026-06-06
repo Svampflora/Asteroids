@@ -52,8 +52,8 @@ void Entity::collide_with(Entity _other)
 	const float dot_product = Vector2DotProduct(v_diff, delta);
 
 	//area stand in for mass
-	const float mass = Area(get_hitbox());
-	const float other_mass = Area(_other.get_hitbox());
+	const float mass = area(get_hitbox());
+	const float other_mass = area(_other.get_hitbox());
 
 	const float mass_ratio = (2 * other_mass) / (mass + other_mass);
 	const float scale_factor = mass_ratio * dot_product / dist_squared;

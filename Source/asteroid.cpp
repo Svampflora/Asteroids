@@ -38,7 +38,7 @@ static inline void DrawAsteroid(Vector2 center, std::vector<float> _radii, float
 	DrawTriangleFan(points.data(), segments + 2, WHITE);
 }
 
-float Asteroid::set_radius() noexcept//TODO: put in settings
+float Asteroid::set_radius() noexcept//TODO: settings.h
 {
 	switch (type)
 	{

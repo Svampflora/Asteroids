@@ -4,15 +4,6 @@
 #include <algorithm>
 
 
-//template<typename T, typename Func>
-//void CheckConditionAndPerformAction(T value, Func action)
-//{
-//	if (value)
-//	{
-//		action();
-//	}
-//}
-
 template <typename T>
 void draw_entities(const std::vector<T>& _entities) noexcept
 {
@@ -74,29 +65,12 @@ void Play_screen::collisions(std::vector<ObjectType>& objects)
 	}
 }
 
-//template <typename ObjectType, typename OtherType>
-//void Play_screen::collisions(std::vector<ObjectType>& objects, std::vector<OtherType>& other_objects)
-//{
-//	for (ObjectType& object : objects)
-//	{
-//		for (OtherType& other_object : other_objects)
-//		{
-//			if (CheckCollisionCircles(object.get_hitbox(), other_object.get_hitbox()))
-//			{
-//				object.collide_with(other_object);
-// 				other_object.collide_with(object);
-//
-//			}
-//		}
-//	}
-//}
-
-
 void Play_screen::collisions(std::vector<Asteroid>& _asteroids, std::vector<Projectile>& _projectiles)
 {
-	for (Asteroid& _asteroid : _asteroids)
+	
+	for (Projectile& _projectile : _projectiles)
 	{
-		for (Projectile& _projectile : _projectiles)
+		for (Asteroid& _asteroid : _asteroids)
 		{
 			if (CheckCollisionCircles(_asteroid.get_hitbox(), _projectile.get_hitbox()))
 			{

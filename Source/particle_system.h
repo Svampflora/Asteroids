@@ -97,7 +97,7 @@ public:
 			{
 				const float life_fraction = (particle.time_remaining / life_time);
 				const float size = Lerp(0.0f, start_size, life_fraction);//negative_curve(life_fraction);
-				DrawCircleV(particle.position, size, LerpColor(start_color, end_color, life_fraction));
+				DrawCircleV(particle.position, size, lerp_color(start_color, end_color, life_fraction));
 
 			}
 		}

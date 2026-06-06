@@ -33,8 +33,8 @@ void Start_screen::draw_title() const noexcept
 	for (float i = 0; i < fade_repititions; i++)
 	{
 		const float fade_alpha = (i / fade_repititions) / 1;
-		const Color trail_color = LerpColor(title_color, { title_color.r, title_color.b, title_color.b, 0U }, fade_alpha);
-		const Vector2 trail_position = LerpPosition(title_position, {title_position.x, title_position.y + 0.1f * GetScreenHeightF() }, fade_alpha);
+		const Color trail_color = lerp_color(title_color, { title_color.r, title_color.b, title_color.b, 0U }, fade_alpha);
+		const Vector2 trail_position = lerp_position(title_position, {title_position.x, title_position.y + 0.1f * GetScreenHeightF() }, fade_alpha);
 		DrawTextEx(font_2, title.data(), trail_position, 200.0f, 1.0f, trail_color);
 	}
 	DrawTextEx(font_2, title.data(), title_position, 200.0f, 1.0f, WHITE);
